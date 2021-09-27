@@ -3,9 +3,9 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame, sys, slimeClass, time
 #from pygame.locals import *
 """
-#Remaining Tasks:
-# I found a bug where if a player corners one of the slimes completely perfectly in the corner,
-#the player stops moving and the game is in a stale
+#Remaining Tasks: (might have fixed this... need to double check...)
+# I found a bug where if a BallTheSlime corners one of the slimes completely perfectly in the corner,
+#the BallTheSlime stops moving and the game is in a stale
 # fixing this bug should be easy just an extra claus
 """
 
@@ -21,15 +21,15 @@ white = 255,255,255
 size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
 
-#starting velocity for general non player sprites/slimes
+#starting velocity for general non BallTheSlime sprites/slimes
 speed = [2, 2] #velocity is a better variable name for this since vector
 
-########___Player Coordinates#######
+########___BallTheSlime Coordinates#######
 x = 200
 y = 200
-#################################
+####################################
 
-########___set up for displaying the title etc#######
+###############___set up for displaying the title etc###############
 ####################################################################
 pygame.font.init()
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
@@ -55,15 +55,15 @@ def keep_inside_screen(x,y):
         y = height - 1
 
 
-###################set up non player sprites using the slimeClass###################
+###################set up non BallTheSlime sprites using the slimeClass###################
 ####################################################################################
 ####################################################################################
-"""Set up for the first original non player slime (this should thus be integrated for the rest of the slimes"""
+"""Set up for the first original non BallTheSlime slime (this should thus be integrated for the rest of the slimes"""
 ball = pygame.image.load("animation/red_slime.png")
 ballrect = ball.get_rect(center = (300,300))
 ####################################################################################
-Player = slimeClass.slime("animation/green_slime_0.png", "slime2", (100,100), 0 , 0)
-Player.set_animation("animation")
+BallTheSlime = slimeClass.slime("animation/green_slime_0.png", "slime2", (100,100), 0 , 0)
+BallTheSlime.set_animation("animation")
 
 ########################################################
 ######################The_Frames########################
@@ -117,52 +117,54 @@ while 1:
 
     ########################___Update with respect to the user inputs#########################
     if keys[4]:
+
         if i%25 < 13:
-            ball2 = pygame.image.load("animation/green_slime_0.png")
+            PlayerSlime = pygame.image.load("animation/green_slime_0.png")
         else:
-            ball2 = pygame.image.load("animation/green_slime_1.png")
+            PlayerSlime = pygame.image.load("animation/green_slime_1.png")
+
         if keys[0]:#UP
             keep_inside_screen(x,y)
-            if check_inside_screen(x, y-10) and not ballrect.colliderect(ball2_rect):
+            if check_inside_screen(x, y-10) and not ballrect.colliderect(PlayerSlime_rect):
                 y-=10
         if keys[1]:#LEFT
             keep_inside_screen(x,y)
-            if check_inside_screen(x-10, y) and not ballrect.colliderect(ball2_rect):
+            if check_inside_screen(x-10, y) and not ballrect.colliderect(PlayerSlime_rect):
                 x-=10
         if keys[2]:#DOWN
             keep_inside_screen(x,y)
-            if check_inside_screen(x, y+10) and not ballrect.colliderect(ball2_rect):
+            if check_inside_screen(x, y+10) and not ballrect.colliderect(PlayerSlime_rect):
                 y+=10
         if keys[3]:#RIGHT
             keep_inside_screen(x+10,y)
-            if check_inside_screen(x+10, y) and not ballrect.colliderect(ball2_rect):
+            if check_inside_screen(x+10, y) and not ballrect.colliderect(PlayerSlime_rect):
                 x+=10
     else:
         if i%25 < 13:
-            ball2 = pygame.image.load("animation/slime.png")
+            PlayerSlime = pygame.image.load("animation/slime.png")
         else:
-            ball2 = pygame.image.load("animation/slime_1.png")
+            PlayerSlime = pygame.image.load("animation/slime_1.png")
         if keys[0]:#UPs
             keep_inside_screen(x,y)
-            if check_inside_screen(x, y-10) and not ballrect.colliderect(ball2_rect):
+            if check_inside_screen(x, y-10) and not ballrect.colliderect(PlayerSlime_rect):
                 y-=5
         if keys[1]:#LEFT
             keep_inside_screen(x,y)
-            if check_inside_screen(x-10, y) and not ballrect.colliderect(ball2_rect):
+            if check_inside_screen(x-10, y) and not ballrect.colliderect(PlayerSlime_rect):
                 x-=5
         if keys[2]:#DOWN
             keep_inside_screen(x,y)
-            if check_inside_screen(x, y+10) and not ballrect.colliderect(ball2_rect):
+            if check_inside_screen(x, y+10) and not ballrect.colliderect(PlayerSlime_rect):
                 y+=5
         if keys[3]:#RIGHT
             keep_inside_screen(x+10,y)
-            if check_inside_screen(x+10, y) and not ballrect.colliderect(ball2_rect):
+            if check_inside_screen(x+10, y) and not ballrect.colliderect(PlayerSlime_rect):
                 x+=5
     ###################################################################
 
 
 
-    #####################___UPDATE ALL WITH RESPECT TO VELOCITY... ALL SPRITES#######################
+    ##################___UPDATE ALL WITH RESPECT TO VELOCITY... ALL SPRITES___#######################
     #################################################################################################
     #################################################################################################
     ballrect = ballrect.move(speed)
@@ -181,12 +183,12 @@ while 1:
         speed[1] = -speed[1]
 
 
-    ball2_rect = ball2.get_rect(center = (x,y)) #this is how you update the player slime location
+    PlayerSlime_rect = PlayerSlime.get_rect(center = (x,y)) #this is how you update the BallTheSlime slime location
     #a better way to do this would be to use the rectangle.move() function and update the speed to zero when not moving,,,
 
-    x_axis_diff = (ballrect.center[0] - ball2_rect.center[0])
-    y_axis_diff = (ballrect.center[1] - ball2_rect.center[1])
-    if ballrect.colliderect(ball2_rect):
+    x_axis_diff = (ballrect.center[0] - PlayerSlime_rect.center[0])
+    y_axis_diff = (ballrect.center[1] - PlayerSlime_rect.center[1])
+    if ballrect.colliderect(PlayerSlime_rect):
         if x_axis_diff!=0 and y_axis_diff!=0:
             speed[0] = 2*x_axis_diff/abs(x_axis_diff)
             speed[1] = 2*y_axis_diff/abs(y_axis_diff)
@@ -203,30 +205,29 @@ while 1:
     else:
         ball = pygame.image.load("animation/red_slime.png")
 
-
     if i%25 <6:
         #we skip zero because there is always a hidden file at the start created.
-        Player.slimeSurface = pygame.image.load(Player.animation[1])
+        BallTheSlime.slimeSurface = pygame.image.load(BallTheSlime.animation[1])
     elif i%25 <12:
-        Player.slimeSurface = pygame.image.load(Player.animation[2])
+        BallTheSlime.slimeSurface = pygame.image.load(BallTheSlime.animation[2])
     elif i%25 <18:
-        Player.slimeSurface = pygame.image.load(Player.animation[3])
+        BallTheSlime.slimeSurface = pygame.image.load(BallTheSlime.animation[3])
     elif i%25 <25:
-        Player.slimeSurface = pygame.image.load(Player.animation[4])
+        BallTheSlime.slimeSurface = pygame.image.load(BallTheSlime.animation[4])
     ###################################################################
     ###################################################################
 
 
-    #########################___"BLITS"___#############################
+    #########################___"Blits"___#############################
     ###################################################################
     screen.fill(white)
     screen.blit(textsurface,(0,0))
     ##################################
     screen.blit(ball, ballrect)
-    screen.blit(ball2, ball2_rect)
+    screen.blit(PlayerSlime, PlayerSlime_rect)
 
-    ########test slime####### <---- SWITCH TO UPDATE NON PLAYER SPRITES
-    screen.blit(Player.slimeSurface, Player.rectangle)
+    ########test slime####### <---- SWITCH TO UPDATE NON BallTheSlime SPRITES
+    screen.blit(BallTheSlime.slimeSurface, BallTheSlime.rectangle)
     ###################################################################
     ###################################################################
 
