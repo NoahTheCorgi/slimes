@@ -81,7 +81,7 @@ def checkIfCollision():
 ####################################################################################
 ####################################################################################
 """Set up for the first original non slimeTheSlime slime (this should thus be integrated for the rest of the slimes"""
-for i in range(10):
+for i in range(20):
     slimeImage = pygame.image.load("animation/red_slime.png")
     slimeRectangle = slimeImage.get_rect(center = (random.randint(0, 500), random.randint(0, 500)))
     slimesArray.append([slimeImage, slimeRectangle, [random.randint(-5, 5), random.randint(-5, 5)]])
@@ -101,7 +101,7 @@ while True:
     if counter >= 100:
         if gameOver == False:
             playerLifePoints += 3
-            for i in range(2):
+            for i in range(3):
                 slimeImage = pygame.image.load("animation/red_slime.png")
                 slimeRectangle = slimeImage.get_rect(center = (random.randint(0, 500), random.randint(0, 500)))
                 slimesArray.append([slimeImage, slimeRectangle, [random.randint(-5, 5), random.randint(-5, 5)]])
@@ -167,7 +167,7 @@ while True:
                 keep_inside_screen(x,y)
                 #if check_inside_screen(x, y-10) and not slimerect.colliderect(PlayerSlime_rect):
                 if check_inside_screen(x, y - 10) and not checkIfCollision():
-                    #y-=10
+                    y-=10
                     PlayerSlime_rect.centery -= 10
                 else:
                     playerLifePoints -= random.randint(1, 10)
@@ -175,7 +175,7 @@ while True:
             if keys[1]:#LEFT
                 keep_inside_screen(x,y)
                 if check_inside_screen(x-10, y) and not checkIfCollision():
-                    #x-=10
+                    x-=10
                     PlayerSlime_rect.centerx -= 10
                 else:
                     playerLifePoints -= random.randint(1, 10)
@@ -183,7 +183,7 @@ while True:
             if keys[2]:#DOWN
                 keep_inside_screen(x,y)
                 if check_inside_screen(x, y+10) and not checkIfCollision():
-                    #y+=10
+                    y+=10
                     PlayerSlime_rect.centery += 10
                 else:
                     playerLifePoints -= random.randint(1, 10)
@@ -191,7 +191,7 @@ while True:
             if keys[3]:#RIGHT
                 keep_inside_screen(x+10,y)
                 if check_inside_screen(x+10, y) and not checkIfCollision():
-                    #x+=10
+                    x+=10
                     PlayerSlime_rect.centerx += 10
                 else:
                     playerLifePoints -= random.randint(1, 10)
@@ -208,7 +208,7 @@ while True:
                 keep_inside_screen(x,y)
                 #if check_inside_screen(x, y-10) and not slimerect.colliderect(PlayerSlime_rect):
                 if check_inside_screen(x, y - 10) and not checkIfCollision():
-                    #y-=5
+                    y-=5
                     PlayerSlime_rect.centery -= 5
                 else:
                     playerLifePoints -= random.randint(1, 10)
@@ -216,6 +216,7 @@ while True:
             if keys[1]:#LEFT
                 keep_inside_screen(x,y)
                 if check_inside_screen(x-10, y) and not checkIfCollision():
+                    x -= 5
                     PlayerSlime_rect.centerx -= 5
                 else:
                     playerLifePoints -= random.randint(1, 10)
@@ -223,7 +224,7 @@ while True:
             if keys[2]:#DOWN
                 keep_inside_screen(x,y)
                 if check_inside_screen(x, y+10) and not checkIfCollision():
-                    #y+=5
+                    y += 5
                     PlayerSlime_rect.centery += 5
                 else:
                     playerLifePoints -= random.randint(1, 10)
@@ -231,7 +232,7 @@ while True:
             if keys[3]:#RIGHT
                 keep_inside_screen(x+10,y)
                 if check_inside_screen(x+10, y) and not checkIfCollision():
-                    #+=5
+                    x+=5
                     PlayerSlime_rect.centerx += 5
                 else:
                     playerLifePoints -= random.randint(1, 10)
@@ -250,17 +251,17 @@ while True:
             slimesArray[i][1] = slimesArray[i][1].move(slimesArray[i][2])
             if slimesArray[i][1].left < 0:
                 slimesArray[i][1].left = 1
-                slimesArray[i][2][0] = -slimesArray[i][2][0]
+                slimesArray[i][2][0] = -slimesArray[i][2][0] * random.randint(1,2)
             if slimesArray[i][1].right > width:
                 slimesArray[i][1].right = width -1
-                slimesArray[i][2][0] = -slimesArray[i][2][0]
+                slimesArray[i][2][0] = -slimesArray[i][2][0] * random.randint(1,2)
 
             if slimesArray[i][1].top < 0 :
                 slimesArray[i][1].top = 1
-                slimesArray[i][2][1] = -slimesArray[i][2][1]
+                slimesArray[i][2][1] = -slimesArray[i][2][1] * random.randint(1,2)
             if slimesArray[i][1].bottom > height:
                 slimesArray[i][1].bottom = height -1
-                slimesArray[i][2][1] = -slimesArray[i][2][1]
+                slimesArray[i][2][1] = -slimesArray[i][2][1] * random.randint(1,2)
 
             x_axis_diff = (slimesArray[i][1].center[0] - PlayerSlime_rect.center[0])
             y_axis_diff = (slimesArray[i][1].center[1] - PlayerSlime_rect.center[1])
@@ -268,6 +269,13 @@ while True:
                 if x_axis_diff!=0 and y_axis_diff!=0:
                     slimesArray[i][2][0] = 2*x_axis_diff/abs(x_axis_diff)
                     slimesArray[i][2][1] = 2*y_axis_diff/abs(y_axis_diff)
+        
+        helperIndex = 0
+        while helperIndex < len(slimesArray):
+            if (slimesArray[helperIndex][2][0] >= 100 or slimesArray[helperIndex][2][1] >= 100):
+                slimesArray.pop(helperIndex)
+                helperIndex -= 1
+            helperIndex += 1
         ###################################################################
         ###################################################################
         ###################################################################
@@ -301,6 +309,7 @@ while True:
         screen.blit(myfont.render("LifePointsLeft: " + str(playerLifePoints), False, (200, 0, 0)), (10, 35))
         screen.blit(myfont.render("Combat Score: " + str(playerCombatScore), False, (200, 100, 0)), (10, 65))
         screen.blit(myfont.render("Time/Frames Survived: " + str(playerTime), False, (200, 200, 100)), (10, 95))
+        screen.blit(myfont.render("Be Careful! Hitting the boundaries reduces LifePointes!! ", False, (200, 0, 0)), (10, 550))
         ##################################
         # player rendered first
         screen.blit(PlayerSlime, PlayerSlime_rect)
@@ -329,6 +338,7 @@ while True:
         screen.blit(myfont.render("LifePointsLeft: " + str(playerLifePoints), False, (200, 0, 0)), (10, 35))
         screen.blit(myfont.render("Combat Score: " + str(playerCombatScore), False, (200, 100, 0)), (10, 65))
         screen.blit(myfont.render("Time/Frames Survived: " + str(playerTime), False, (200, 200, 100)), (10, 95))
+        screen.blit(myfont.render("Be Careful! Hitting the boundaries reduces LifePointes!! ", False, (200, 0, 0)), (10, 550))
         ##################################
         # player rendered first
         screen.blit(PlayerSlime, PlayerSlime_rect)
