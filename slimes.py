@@ -40,13 +40,15 @@ playerLifePoints = 100
 playerCombatScore = 0
 playerTime = 0
 
+gameOver = False
+
 
 
 ###############___set up for displaying the title etc###############
 ####################################################################
 pygame.font.init()
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
-textsurface = myfont.render('Slimes The Game by NoahTheCorgi', False, (0, 200, 0))
+textsurface = myfont.render('Slimes Game - NoahTheCorgi -- Press Space to Speed Up! :D', False, (0, 200, 0))
 ####################################################################
 ####################################################################
 
@@ -78,10 +80,10 @@ def checkIfCollision():
 ####################################################################################
 ####################################################################################
 """Set up for the first original non slimeTheSlime slime (this should thus be integrated for the rest of the slimes"""
-for i in range(10):
+for i in range(30):
     slimeImage = pygame.image.load("animation/red_slime.png")
     slimeRectangle = slimeImage.get_rect(center = (random.randint(0, 500), random.randint(0, 500)))
-    slimesArray.append([slimeImage, slimeRectangle, [random.randint(-3, 3), random.randint(-3, 3)]])
+    slimesArray.append([slimeImage, slimeRectangle, [random.randint(-5, 5), random.randint(-5, 5)]])
 
 ####################################################################################
 
@@ -95,7 +97,9 @@ counter = 0
 while True:
     #time.sleep(1)
 
-    if counter >= 100:
+    if counter >= 1000:
+        if gameOver == False:
+            playerLifePoints += 10
         counter = 0
 
     ###################___Get information about user inputs___##################
@@ -161,33 +165,40 @@ while True:
                     #y-=10
                     PlayerSlime_rect.centery -= 10
                 else:
-                    playerLifePoints -= 10
+                    playerLifePoints -= 1
+                    playerCombatScore += 1
             if keys[1]:#LEFT
                 keep_inside_screen(x,y)
                 if check_inside_screen(x-10, y) and not checkIfCollision():
                     #x-=10
                     PlayerSlime_rect.centerx -= 10
                 else:
-                    playerLifePoints -= 10
+                    playerLifePoints -= 1
+                    playerCombatScore += 1
             if keys[2]:#DOWN
                 keep_inside_screen(x,y)
                 if check_inside_screen(x, y+10) and not checkIfCollision():
                     #y+=10
                     PlayerSlime_rect.centery += 10
                 else:
-                    playerLifePoints -= 10
+                    playerLifePoints -= 1
+                    playerCombatScore += 1
             if keys[3]:#RIGHT
                 keep_inside_screen(x+10,y)
                 if check_inside_screen(x+10, y) and not checkIfCollision():
                     #x+=10
                     PlayerSlime_rect.centerx += 10
                 else:
-                    playerLifePoints -= 10
+                    playerLifePoints -= 1
+                    playerCombatScore += 1
         else:
             if counter%25 < 13:
                 PlayerSlime = pygame.image.load("animation/slime.png")
             else:
                 PlayerSlime = pygame.image.load("animation/slime_1.png")
+            if checkIfCollision():
+                playerLifePoints -= 1
+                playerCombatScore += 1
             if keys[0]:#UPs
                 keep_inside_screen(x,y)
                 #if check_inside_screen(x, y-10) and not slimerect.colliderect(PlayerSlime_rect):
@@ -195,27 +206,31 @@ while True:
                     #y-=5
                     PlayerSlime_rect.centery -= 5
                 else:
-                    playerLifePoints -= 10
+                    playerLifePoints -= 1
+                    playerCombatScore += 1
             if keys[1]:#LEFT
                 keep_inside_screen(x,y)
                 if check_inside_screen(x-10, y) and not checkIfCollision():
                     PlayerSlime_rect.centerx -= 5
                 else:
-                    playerLifePoints -= 10
+                    playerLifePoints -= 1
+                    playerCombatScore += 1
             if keys[2]:#DOWN
                 keep_inside_screen(x,y)
                 if check_inside_screen(x, y+10) and not checkIfCollision():
                     #y+=5
                     PlayerSlime_rect.centery += 5
                 else:
-                    playerLifePoints -= 10
+                    playerLifePoints -= 1
+                    playerCombatScore += 1
             if keys[3]:#RIGHT
                 keep_inside_screen(x+10,y)
                 if check_inside_screen(x+10, y) and not checkIfCollision():
                     #+=5
                     PlayerSlime_rect.centerx += 5
                 else:
-                    playerLifePoints -= 10
+                    playerLifePoints -= 1
+                    playerCombatScore += 1
         ###################################################################
 
 
@@ -303,6 +318,7 @@ while True:
 
         playerTime += 1
     else:
+        gameOver = True
         screen.fill(white)
         screen.blit(textsurface, (0, 0))
         screen.blit(myfont.render("LifePointsLeft: " + str(playerLifePoints), False, (200, 0, 0)), (10, 35))
@@ -315,7 +331,7 @@ while True:
         for i in range(len(slimesArray)):
             screen.blit(slimesArray[i][0], slimesArray[i][1])
 
-        screen.blit(myfont.render("Game Over..." + str(playerTime), False, (200, 0, 0)), (300, 300))
+        screen.blit(myfont.render("Game Over at Time/Frame: " + str(playerTime), False, (200, 0, 0)), (300, 300))
 
         ########test slime####### <---- SWITCH TO UPDATE NON slimeTheSlime SPRITES
         # screen.blit(slimeTheSlime.slimeSurface, slimeTheSlime.rectangle)
