@@ -72,6 +72,7 @@ def keep_inside_screen(x,y):
 def checkIfCollision():
     for i in range(len(slimesArray)):
         if slimesArray[i][1].colliderect(PlayerSlime_rect):
+            slimesArray.pop(i)
             return True
     return False
 
@@ -80,7 +81,7 @@ def checkIfCollision():
 ####################################################################################
 ####################################################################################
 """Set up for the first original non slimeTheSlime slime (this should thus be integrated for the rest of the slimes"""
-for i in range(30):
+for i in range(10):
     slimeImage = pygame.image.load("animation/red_slime.png")
     slimeRectangle = slimeImage.get_rect(center = (random.randint(0, 500), random.randint(0, 500)))
     slimesArray.append([slimeImage, slimeRectangle, [random.randint(-5, 5), random.randint(-5, 5)]])
@@ -97,9 +98,13 @@ counter = 0
 while True:
     #time.sleep(1)
 
-    if counter >= 1000:
+    if counter >= 100:
         if gameOver == False:
-            playerLifePoints += 10
+            playerLifePoints += 3
+            for i in range(2):
+                slimeImage = pygame.image.load("animation/red_slime.png")
+                slimeRectangle = slimeImage.get_rect(center = (random.randint(0, 500), random.randint(0, 500)))
+                slimesArray.append([slimeImage, slimeRectangle, [random.randint(-5, 5), random.randint(-5, 5)]])
         counter = 0
 
     ###################___Get information about user inputs___##################
@@ -165,7 +170,7 @@ while True:
                     #y-=10
                     PlayerSlime_rect.centery -= 10
                 else:
-                    playerLifePoints -= 1
+                    playerLifePoints -= random.randint(1, 10)
                     playerCombatScore += 1
             if keys[1]:#LEFT
                 keep_inside_screen(x,y)
@@ -173,7 +178,7 @@ while True:
                     #x-=10
                     PlayerSlime_rect.centerx -= 10
                 else:
-                    playerLifePoints -= 1
+                    playerLifePoints -= random.randint(1, 10)
                     playerCombatScore += 1
             if keys[2]:#DOWN
                 keep_inside_screen(x,y)
@@ -181,7 +186,7 @@ while True:
                     #y+=10
                     PlayerSlime_rect.centery += 10
                 else:
-                    playerLifePoints -= 1
+                    playerLifePoints -= random.randint(1, 10)
                     playerCombatScore += 1
             if keys[3]:#RIGHT
                 keep_inside_screen(x+10,y)
@@ -189,7 +194,7 @@ while True:
                     #x+=10
                     PlayerSlime_rect.centerx += 10
                 else:
-                    playerLifePoints -= 1
+                    playerLifePoints -= random.randint(1, 10)
                     playerCombatScore += 1
         else:
             if counter%25 < 13:
@@ -197,7 +202,7 @@ while True:
             else:
                 PlayerSlime = pygame.image.load("animation/slime_1.png")
             if checkIfCollision():
-                playerLifePoints -= 1
+                playerLifePoints -= random.randint(1, 10)
                 playerCombatScore += 1
             if keys[0]:#UPs
                 keep_inside_screen(x,y)
@@ -206,14 +211,14 @@ while True:
                     #y-=5
                     PlayerSlime_rect.centery -= 5
                 else:
-                    playerLifePoints -= 1
+                    playerLifePoints -= random.randint(1, 10)
                     playerCombatScore += 1
             if keys[1]:#LEFT
                 keep_inside_screen(x,y)
                 if check_inside_screen(x-10, y) and not checkIfCollision():
                     PlayerSlime_rect.centerx -= 5
                 else:
-                    playerLifePoints -= 1
+                    playerLifePoints -= random.randint(1, 10)
                     playerCombatScore += 1
             if keys[2]:#DOWN
                 keep_inside_screen(x,y)
@@ -221,7 +226,7 @@ while True:
                     #y+=5
                     PlayerSlime_rect.centery += 5
                 else:
-                    playerLifePoints -= 1
+                    playerLifePoints -= random.randint(1, 10)
                     playerCombatScore += 1
             if keys[3]:#RIGHT
                 keep_inside_screen(x+10,y)
@@ -229,7 +234,7 @@ while True:
                     #+=5
                     PlayerSlime_rect.centerx += 5
                 else:
-                    playerLifePoints -= 1
+                    playerLifePoints -= random.randint(1, 10)
                     playerCombatScore += 1
         ###################################################################
 
