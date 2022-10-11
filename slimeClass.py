@@ -5,9 +5,8 @@ class slime:
 
 	empCount = 0
 	slimesList = []
-
-	def __init__(self, defaultImage, name, location, x, y): #location is tuple and x and y are velocity
-
+	#location is tuple and x and y are velocity
+	def __init__(self, defaultImage, name, location, x, y):
 		self.veloctiy = (x,y)
 
 		if type(name) is str:
@@ -20,8 +19,9 @@ class slime:
 			print("second attribute color must be a str")
 		slime.empCount += 1
 		slime.slimesList.append(self)
-
-		self.animation = [defaultImage] #list of string elements that refer to the image file
+		
+		#list of string elements that refer to the image file
+		self.animation = [defaultImage]
 		self.slimeSurface = pygame.image.load(self.animation[0])
 		self.rectangle = self.slimeSurface.get_rect(center = location)
 
@@ -34,7 +34,8 @@ class slime:
 	def reset_animation(self, string):
 		self.animation = []
 
-	def set_animation(self, folder): #folder is the string of directory folder of animations (with the correctly ordered names)
+	def set_animation(self, folder):
+		 #folder is the string of directory folder of animations (with the correctly ordered names)
 		if type(folder) is str:
 			for item in sorted(os.listdir("./" + folder)):
 				self.animation.append("animation/" + item)
