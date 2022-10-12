@@ -1,16 +1,18 @@
+# NoahTheCorgi
+
 import os
 import random
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame, sys, slimeClass, time
 #from pygame.locals import *
 
-pygame.init() #set up for general variables and general prepartion
+# set up for general variables and general prepartion
+pygame.init()
 
-keys = [False, False, False, False, False, False] #up, left, down, right, space, ESC
+# up, left, down, right, space, ESC
+keys = [False, False, False, False, False, False]
 
 slimesArray = []
-# for i in range(10):
-#     slimesArr
 
 black = 0, 0, 0
 red = 200, 0, 0
@@ -20,13 +22,13 @@ white = 255,255,255
 size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
 
-#starting velocity for general non slimeTheSlime sprites/slimes
+# starting velocity for general non slimeTheSlime sprites/slimes
 # speed = [2, 2] #velocity is a better variable name for this since vector
 
-########___slimeTheSlime Coordinates#######
+########___slimeTheSlime Coordinates___#######
 x = 200
 y = 200
-####################################
+##############################################
 
 #this is how you update the slimeTheSlime slime location
 PlayerSlime = pygame.image.load("animation/green_slime_0.png")
@@ -38,7 +40,6 @@ playerTime = 0
 gameOver = False
 
 
-
 ###############___set up for displaying the title etc###############
 ####################################################################
 pygame.font.init()
@@ -46,6 +47,7 @@ myfont = pygame.font.SysFont('Comic Sans MS', 30)
 textsurface = myfont.render('Slimes Game - NoahTheCorgi -- Press Space to Speed Up! :D', False, (0, 200, 0))
 ####################################################################
 ####################################################################
+
 
 ########___predefined functions to use later___#######
 def check_inside_screen(x,y):
@@ -81,13 +83,9 @@ for i in range(20):
     slimeRectangle = slimeImage.get_rect(center = (random.randint(0, 500), random.randint(0, 500)))
     slimesArray.append([slimeImage, slimeRectangle, [random.randint(-5, 5), random.randint(-5, 5)]])
 
-####################################################################################
-
-# slimeTheSlime = slimeClass.slime("animation/green_slime_0.png", "slime2", (100,100), 0 , 0)
-# slimeTheSlime.set_animation("animation")
 
 ########################################################
-######################The_Frames########################
+####################__The_Frames__######################
 ########################################################
 counter = 0
 while True:
@@ -115,16 +113,16 @@ while True:
                 keys[5] = True
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP or event.key == pygame.W:
                 print("up")
                 keys[0] = True
-            elif event.key == pygame.K_LEFT:
+            elif event.key == pygame.K_LEFT or event.key == pygame.A:
                 print("left")
                 keys[1] = True
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_DOWN or event.key == pygame.S:
                 print("down")
                 keys[2] = True
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT or event.key == pygame.D:
                 print("right")
                 keys[3] = True
             elif event.key == pygame.K_SPACE:
@@ -132,13 +130,13 @@ while True:
                 keys[4] = True
 
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP or event.key == pygame.W:
                 keys[0] = False
-            elif event.key == pygame.K_LEFT:
+            elif event.key == pygame.K_LEFT or event.key == pygame.A:
                 keys[1] = False
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_DOWN or event.key == pygame.S:
                 keys[2] = False
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT or event.key == pygame.D:
                 keys[3] = False
             elif event.key == pygame.K_SPACE:
                 keys[4] = False
@@ -326,7 +324,9 @@ while True:
             sys.exit()
 
         playerTime += 1
+
     else:
+
         gameOver = True
         screen.fill(white)
         screen.blit(textsurface, (0, 0))
@@ -343,12 +343,8 @@ while True:
 
         screen.blit(myfont.render("Game Over at Time/Frame: " + str(playerTime), False, (200, 0, 0)), (300, 300))
 
-        ########test slime####### <---- SWITCH TO UPDATE NON slimeTheSlime SPRITES
-        # screen.blit(slimeTheSlime.slimeSurface, slimeTheSlime.rectangle)
-        ###################################################################
-        ###################################################################
 
-        ########UPDATE EVERYTHING THAT HAD BEEN PREPARED FOR THE NEXT "FRAME########
+        ########___UPDATE EVERYTHING THAT HAD BEEN PREPARED FOR THE NEXT FRAME___########
         pygame.time.wait(26)
         pygame.display.flip()
 

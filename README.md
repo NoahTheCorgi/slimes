@@ -4,9 +4,15 @@ Slimes The Game by NoahTheCorgi
 This Project uses the Pygame Library under the LGPL v2 License
 This Project is in Alpha Version
 
+Please run with the command:
+python slimes.py
+or
+python3 slimes.py
+, while within the source code directory.
+
 Game Objective: Score higher and better.
 
-Arrow keys: Movement
+Arrow keys OR WASD keys: Movement
 Space key: Accelerate
 
 - Hold the Space key to accelerate.
@@ -18,5 +24,5 @@ Space key: Accelerate
 - Slimes randomly generate over time/
 - The main goal is to find a balance between combat vs. dodge.
     ... before there are just too many slimes! XD
-- Good luck!
 
+Good luck!
