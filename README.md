@@ -6,7 +6,7 @@ This Project is in Alpha Version
 
 Please run with the command:
 python slimes.py
-or
+... OR ...
 python3 slimes.py
 , while within the source code directory.
 
@@ -27,3 +27,6 @@ Space key OR Right-Shift key: Accelerate
     ... before there are just too many slimes! XD
 
 Good luck!
+
+# Pygame library license
+# GNU LGPL version 2.1.

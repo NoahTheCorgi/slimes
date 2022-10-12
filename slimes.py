@@ -43,7 +43,7 @@ gameOver = False
 ###############___set up for displaying the title etc###############
 ####################################################################
 pygame.font.init()
-myfont = pygame.font.SysFont('Comic Sans MS', 30)
+myfont = pygame.font.SysFont('Comic Sans MS', 28)
 textsurface = myfont.render('Slimes Game - NoahTheCorgi -- Press Space to Speed Up! :D', False, (0, 200, 0))
 ####################################################################
 ####################################################################
@@ -74,7 +74,7 @@ def checkIfCollision():
     return False
 
 
-###################set up non slimeTheSlime sprites using the slimeClass###################
+######______set up non slimeTheSlime sprites using the slimeClass______#############
 ####################################################################################
 ####################################################################################
 """Set up for the first original non slimeTheSlime slime (this should thus be integrated for the rest of the slimes"""
@@ -297,21 +297,19 @@ while True:
         ###################################################################
 
 
-        #########################___"Blits"___#############################
-        ###################################################################
+        #########################___Pygame_blits___#############################
+        ########################################################################
         screen.fill(white)
         screen.blit(textsurface, (0,0))
         screen.blit(myfont.render("LifePointsLeft: " + str(playerLifePoints), False, (200, 0, 0)), (10, 35))
         screen.blit(myfont.render("Combat Score: " + str(playerCombatScore), False, (200, 100, 0)), (10, 65))
         screen.blit(myfont.render("Time/Frames Survived: " + str(playerTime), False, (200, 200, 100)), (10, 95))
         screen.blit(myfont.render("Be Careful! Hitting the boundaries reduces LifePointes!! ", False, (200, 0, 0)), (10, 550))
-        ##################################
         # player rendered first
         screen.blit(PlayerSlime, PlayerSlime_rect)
         # all the npc slimes rendered
         for i in range (len(slimesArray)):
             screen.blit(slimesArray[i][0], slimesArray[i][1])
-
         ######## test slime ####### <---- SWITCH TO UPDATE NON slimeTheSlime SPRITES
         # screen.blit(slimeTheSlime.slimeSurface, slimeTheSlime.rectangle)
         ###################################################################
@@ -344,7 +342,6 @@ while True:
             screen.blit(slimesArray[i][0], slimesArray[i][1])
 
         screen.blit(myfont.render("Game Over at Time/Frame: " + str(playerTime), False, (200, 0, 0)), (300, 300))
-
 
         ########___UPDATE EVERYTHING THAT HAD BEEN PREPARED FOR THE NEXT FRAME___########
         pygame.time.wait(26)
