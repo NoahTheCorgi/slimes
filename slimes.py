@@ -89,7 +89,9 @@ for i in range(20):
 ########################################################
 counter = 0
 while True:
-    #time.sleep(1)
+    
+    # optional::
+    # time.sleep(1)
 
     if counter >= 100:
         if gameOver == False:
@@ -113,32 +115,32 @@ while True:
                 keys[5] = True
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP or event.key == pygame.W:
+            if event.key == pygame.K_UP or event.key == pygame.K_w:
                 print("up")
                 keys[0] = True
-            elif event.key == pygame.K_LEFT or event.key == pygame.A:
+            elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
                 print("left")
                 keys[1] = True
-            elif event.key == pygame.K_DOWN or event.key == pygame.S:
+            elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
                 print("down")
                 keys[2] = True
-            elif event.key == pygame.K_RIGHT or event.key == pygame.D:
+            elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 print("right")
                 keys[3] = True
-            elif event.key == pygame.K_SPACE:
+            elif event.key == pygame.K_SPACE or event.key == pygame.K_RSHIFT:
                 print("space")
                 keys[4] = True
 
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_UP or event.key == pygame.W:
+            if event.key == pygame.K_UP or event.key == pygame.K_w:
                 keys[0] = False
-            elif event.key == pygame.K_LEFT or event.key == pygame.A:
+            elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
                 keys[1] = False
-            elif event.key == pygame.K_DOWN or event.key == pygame.S:
+            elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
                 keys[2] = False
-            elif event.key == pygame.K_RIGHT or event.key == pygame.D:
+            elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 keys[3] = False
-            elif event.key == pygame.K_SPACE:
+            elif event.key == pygame.K_SPACE or event.key == pygame.K_RSHIFT:
                 keys[4] = False
 
 
@@ -310,7 +312,7 @@ while True:
         for i in range (len(slimesArray)):
             screen.blit(slimesArray[i][0], slimesArray[i][1])
 
-        ########test slime####### <---- SWITCH TO UPDATE NON slimeTheSlime SPRITES
+        ######## test slime ####### <---- SWITCH TO UPDATE NON slimeTheSlime SPRITES
         # screen.blit(slimeTheSlime.slimeSurface, slimeTheSlime.rectangle)
         ###################################################################
         ###################################################################
