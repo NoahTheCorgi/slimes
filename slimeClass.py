@@ -35,7 +35,7 @@ class slime:
 		self.animation = []
 
 	def set_animation(self, folder):
-		 #folder is the string of directory folder of animations (with the correctly ordered names)
+		 # folder is the string of directory folder of animations (with the correctly ordered names)
 		if type(folder) is str:
 			for item in sorted(os.listdir("./" + folder)):
 				self.animation.append("animation/" + item)

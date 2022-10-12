@@ -1,6 +1,22 @@
 # slimes
-(alpha) Slimes The Game by NoahTheCorgi
+Slimes The Game by NoahTheCorgi
 
 This Project uses the Pygame Library under the LGPL v2 License
-
 This Project is in Alpha Version
+
+Game Objective: Score higher and better.
+
+Arrow keys: Movement
+Space key: Accelerate
+
+- Hold the Space key to accelerate.
+- Slimes randomly increase in speed and when they get too fast they evaporate.
+- You, as a slime, can combat by running into another slime.
+- Combat with another slime decreases your health/life points.
+- Combat with another slime increases your Combat Score.
+- Health slowly increases back up.
+- Slimes randomly generate over time/
+- The main goal is to find a balance between combat vs. dodge.
+    ... before there are just too many slimes! XD
+- Good luck!
+

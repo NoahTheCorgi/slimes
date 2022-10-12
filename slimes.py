@@ -3,12 +3,6 @@ import random
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame, sys, slimeClass, time
 #from pygame.locals import *
-"""
-#Remaining Tasks: (might have fixed this... need to double check...)
-# I found a bug where if a slimeTheSlime corners one of the slimes completely perfectly in the corner,
-#the slimeTheSlime stops moving and the game is in a stale
-# fixing this bug should be easy just an extra claus
-"""
 
 pygame.init() #set up for general variables and general prepartion
 
@@ -34,8 +28,9 @@ x = 200
 y = 200
 ####################################
 
+#this is how you update the slimeTheSlime slime location
 PlayerSlime = pygame.image.load("animation/green_slime_0.png")
-PlayerSlime_rect = PlayerSlime.get_rect(center = (x,y)) #this is how you update the slimeTheSlime slime location
+PlayerSlime_rect = PlayerSlime.get_rect(center = (x,y))
 playerLifePoints = 100
 playerCombatScore = 0
 playerTime = 0
