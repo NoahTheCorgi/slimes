@@ -29,4 +29,4 @@ Space key OR Right-Shift key: Accelerate
 Good luck!
 
 # Pygame library license
-# GNU LGPL version 2.1.
+GNU LGPL version 2.1.
