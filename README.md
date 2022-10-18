@@ -2,17 +2,23 @@
 Slimes The Game by NoahTheCorgi
 
 This Project uses the Pygame Library under the LGPL v2 License
+
 This Project is in Alpha Version
 
 Please run with the command:
+
 python slimes.py
+
 ... OR ...
+
 python3 slimes.py
+
 , while within the source code directory.
 
 Game Objective: Score higher and better.
 
 Arrow keys OR WASD keys: Movement
+
 Space key OR Right-Shift key: Accelerate
 
 - Please note::
